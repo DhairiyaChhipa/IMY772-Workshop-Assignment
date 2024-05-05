@@ -1,4 +1,4 @@
-# IMY772-Workshop-Assignment
+# IMY772 Workshop Assignment
 
 ## Functional Requirements for a Hexadecimal Calculator
 
