@@ -1,0 +1,14 @@
+{
+  "name": "hexadecimal-calculator",
+  "version": "1.0.0",
+  "description": "A hexadecimal calculator for the IMY772 hexadecimal calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Dhairiya Chhipa",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
