@@ -1,16 +1,22 @@
+const hexadecimalCode = /^[a-fA-F0-9]+$/;
+const decimalCode = /^[0-9]+$/;
+
 module.exports = {
     isHexadecimal(x){
-        return Boolean(x.match(/^0x[0-9a-f]+$/i))
+        return hexadecimalCode.test(x);
     },
+
     isDecimal(x){
-        return !isNaN(x)
+        return !isNaN(Number(x));
     },
-    getDecimal(x){
-        if (!this.isHexadecimal(x)) throw "Non-decimal number";
-        return parseInt(x, 16);
-    },
-    getHexadecimal(x){
-        if (!this.isDecimal(x)) throw "Non-hexadecimal number";
+
+    decToHex(x){
+        if (!this.isDecimal(x)) throw "Non-decimal number";
         return x.toString(16).toUpperCase();
+    },
+
+    hextoDec(x){
+        if (!this.isHexadecimal(x)) throw "Non-hexadecimal number";
+        return parseInt(x, 16);
     }
 };
