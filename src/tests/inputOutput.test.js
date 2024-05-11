@@ -1,20 +1,40 @@
-// expect('2BC').toHaveLength(3);
-// expect('75434775').not.toHaveLength(6);
+const inputOutput = require("../calculator/inputOutput");
+const multiply = require("../calculator/arithmeticOperators").multiply;
 
-// // string input check?
+// =================== INPUT ===================
+// Testing input type
+test('Entering a non-hexadecimal number for both operands', () => {
+    expect(() => inputOutput.validOperands("2BCSD609HM", "87D9FYHYL")).toThrow("Invalid operands");
+});
 
 test('Entering a non-hexadecimal number as operand 1', () => {
-    expect(() => divide("87D9FYHYL", "2BC")).toThrow('A non-hexadecimal number was entered');
+    expect(() => inputOutput.validOperands("87D9FYHYL", "2BC")).toThrow("Invalid operand 1");
 });
 
 test('Entering a non-hexadecimal number as operand 2', () => {
-    expect(() => divide("2BC", "87D9FYHYL")).toThrow('A non-hexadecimal number was entered');
+    expect(() => inputOutput.validOperands("2BC", "87D9FYHYL")).toThrow("Invalid operand 2");
 });
 
-test('Entering negative number as operand 1', () => {
-    expect(() => divide("-B78", "2BC")).toThrow('A negative number was entered');
+// Testing input length
+test('Entering two hexadecimal operands that are longer than 3 characters', () => {
+    expect(() => inputOutput.validOperands("2BDF", "8CD5")).toThrow("Long operands");
 });
 
-test('Entering a negative number as operand 2', () => {
-    expect(() => divide("B78", "-2BC")).toThrow('A negative number was entered');
+test('Entering a hexadecimal operand 1 that is longer than 3 characters', () => {
+    expect(() => inputOutput.validOperands("8CD5", "2B")).toThrow("Long operand 1");
+});
+
+test('Entering a hexadecimal operand 2 that is longer than 3 characters', () => {
+    expect(() => inputOutput.validOperands("2B", "8CD5")).toThrow("Long operand 2");
+});
+
+// =================== OUTPUT ===================
+// Testing output type
+test('Output is a hexadecimal number', () => {
+    expect(() => inputOutput.validOperands(multiply("8AB", "85"))).not.toThrow("Invalid answer");
+});
+
+// Testing output length
+test('Output longer than 6 characters', () => {
+    expect(() => inputOutput.validAnswer(multiply("8AB", "8CD5"))).toThrow("Long answer");
 });

@@ -1,5 +1,4 @@
 const hexadecimalCode = /^[a-fA-F0-9]+$/;
-const decimalCode = /^[0-9]+$/;
 
 module.exports = {
     isHexadecimal(x){
