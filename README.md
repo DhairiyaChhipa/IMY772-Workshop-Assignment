@@ -15,8 +15,3 @@
 - Display error message to user if a non-hexdecimal number is entered
 - Display error message to user if a negative hexdecimal number is entered
 - Allow users to correct error after an error message is displayed to them
-
-### 🧠 Memory functions
-- Store timestamps of previous questions
-- Store answers of previous questions
-- Store operands and operators of previous questions
