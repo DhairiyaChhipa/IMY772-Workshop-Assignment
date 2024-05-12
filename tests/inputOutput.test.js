@@ -1,5 +1,5 @@
-const inputOutput = require("../calculator/inputOutput");
-const multiply = require("../calculator/arithmeticOperators").multiply;
+const inputOutput = require("./calculator/inputOutput");
+const multiply = require("./calculator/arithmeticOperators").multiply;
 
 // =================== INPUT ===================
 // Testing input type

@@ -1,8 +1,8 @@
-const convert = require("../calculator/converter");
-const add = require("../calculator/arithmeticOperators").add;
-const subtract = require("../calculator/arithmeticOperators").subtract;
-const multiply = require("../calculator/arithmeticOperators").multiply;
-const divide = require("../calculator/arithmeticOperators").divide;
+const convert = require("./calculator/converter");
+const add = require("./calculator/arithmeticOperators").add;
+const subtract = require("./calculator/arithmeticOperators").subtract;
+const multiply = require("./calculator/arithmeticOperators").multiply;
+const divide = require("./calculator/arithmeticOperators").divide;
 
 // =================== CONVERSIONS ===================
 // Hexadecimal -> Decimal Conversion
