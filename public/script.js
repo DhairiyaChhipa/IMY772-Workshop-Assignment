@@ -11,6 +11,8 @@ function init() {
 
     const list = document.querySelectorAll(".btn");
 
+    console.log(list.length);
+
     for (let i = 0; i < list.length; i++)
     {
         switch(i){
@@ -27,6 +29,13 @@ function init() {
                     }
                 });
                 break;
+
+            case 24:
+                addEvent("click", list[i], ()=>{
+                    solve();
+                });
+                break;
+
             default:
                 addEvent("click", list[i], ()=>{
                     display(list[i].dataset.operation);
@@ -58,9 +67,18 @@ function display(val) {
 
 function solve() { 
     let x = document.getElementById("result").value;
-    let y = math.evaluate(x);
+    console.log(x);
+    let y = evaluate(x);
     document.getElementById("result").value = y;
-} 
+}
+
+function evaluate(expression) {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 function clear() { 
     document.getElementById("result").value = "";

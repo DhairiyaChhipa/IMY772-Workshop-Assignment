@@ -12,6 +12,8 @@ function init() {
 
     const list = document.querySelectorAll(".btn");
 
+    console.log(list.length);
+
     for (let i = 0; i < list.length; i++)
     {
         switch(i){
@@ -28,6 +30,13 @@ function init() {
                     }
                 });
                 break;
+
+            case 24:
+                addEvent("click", list[i], ()=>{
+                    solve();
+                });
+                break;
+
             default:
                 addEvent("click", list[i], ()=>{
                     display(list[i].dataset.operation);
@@ -57,11 +66,13 @@ function display(val) {
     document.getElementById("result").value += val;
 }
 
-function solve() { 
-    let x = document.getElementById("result").value;
-    let y = math.evaluate(x);
-    document.getElementById("result").value = y;
-} 
+function evaluate(expression) {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 function clear() { 
     document.getElementById("result").value = "";
@@ -93,6 +104,22 @@ function convertToHex(val) {
         document.getElementById("decToHex-result").innerText = error;
     }
 }
+
+const precedence = {
+    "+" : 1,
+    "-": 2,
+    "*": 3,
+    "/": 4,
+}
+
+function solve() { 
+    let x = document.getElementById("result").value;
+    console.log(x);
+    let y = evaluate(x);
+    document.getElementById("result").value = y;
+}
+
+
 },{"../src/calculator/converter":2}],2:[function(require,module,exports){
 const hexadecimalCode = /^[a-fA-F0-9]+$/;
 
