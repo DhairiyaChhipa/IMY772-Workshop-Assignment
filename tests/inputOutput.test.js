@@ -1,5 +1,6 @@
-const inputOutput = require("./calculator/inputOutput");
-const multiply = require("./calculator/arithmeticOperators").multiply;
+const directory = "../src/calculator"
+const inputOutput = require(`${directory}/inputOutput`);
+const multiply = require(`${directory}/arithmeticOperators`).multiply;
 
 // =================== INPUT ===================
 // Testing input type
