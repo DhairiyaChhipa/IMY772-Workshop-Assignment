@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+<<<<<<< HEAD
     "dev": "node app.js"
+=======
+    "dev": "browserify public/script.js > public/bundle.js && node app.js",
+    "start": "nodemon"
+>>>>>>> 867fb416feaeeccfeb62bca7b6d0a2e644e0e851
   },
   "author": "Dhairiya Chhipa",
   "license": "ISC",
