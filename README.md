@@ -4,6 +4,7 @@
 
 ### 🧮 Basic operations
 - Perform addition, subtraction, multiplication and divison operations
+- Allow users to chain together different operations
 - Allow users to convert decimal numbers to hexadecimal numbers, and vice versa
 
 ### ⌨️ Input and output
