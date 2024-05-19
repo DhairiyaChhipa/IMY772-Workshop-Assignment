@@ -1,4 +1,4 @@
-class stack{
+class Stack{
     constructor() {
         this.list = [];
     }
@@ -29,3 +29,5 @@ class stack{
         return string;
     }
 }
+
+module.exports = {Stack};
