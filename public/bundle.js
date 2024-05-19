@@ -66,6 +66,13 @@ function display(val) {
     document.getElementById("result").value += val;
 }
 
+function solve() { 
+    let x = document.getElementById("result").value;
+    console.log(x);
+    let y = evaluate(x);
+    document.getElementById("result").value = y;
+}
+
 function evaluate(expression) {
     try {
         
@@ -104,22 +111,6 @@ function convertToHex(val) {
         document.getElementById("decToHex-result").innerText = error;
     }
 }
-
-const precedence = {
-    "+" : 1,
-    "-": 2,
-    "*": 3,
-    "/": 4,
-}
-
-function solve() { 
-    let x = document.getElementById("result").value;
-    console.log(x);
-    let y = evaluate(x);
-    document.getElementById("result").value = y;
-}
-
-
 },{"../src/calculator/converter":2}],2:[function(require,module,exports){
 const hexadecimalCode = /^[a-fA-F0-9]+$/;
 

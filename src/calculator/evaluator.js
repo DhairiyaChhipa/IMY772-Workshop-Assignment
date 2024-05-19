@@ -2,9 +2,6 @@ const { Stack } = require("./stack");
 const operators = require(`./arithmeticOperators`);
 const e = require("express");
 
-// let tokens = new Stack();
-
-
 function tokenize(expression) {
     let tokens = [];
     let currToken = "";
@@ -28,6 +25,12 @@ function tokenize(expression) {
     if (currToken.length > 0) {
         tokens.push(currToken);
     }
+
+    // let string = "";
+    // for (let i = 0; i < tokens.length; i++) {
+    //     string += tokens[i] + " ";
+    // }
+    // console.log(string);
 
     return tokens;
 }
@@ -89,17 +92,35 @@ function evaluatePostfix(postfixTokens)
     const stack = [];
     
     postfixTokens.forEach(token => {
-        if (!isNaN(token)) { stack.push(parseInt(token)); } 
+
+        const delimiters = "+-/*()";
+
+        if (!delimiters.includes(token)) {
+            stack.push(token);
+        }
+
         else 
         {
-            const b = stack.pop();
-            const a = stack.pop();
+            const operand2 = stack.pop();
+            const operand1 = stack.pop();
+            var result;
+
             switch (token) {
-                case '+': stack.push(operators.add(a, b)); break;
-                case '-': stack.push(operators.subtract(a, b)); break;
-                case '*': stack.push(operators.multiply(a, b)); break;
-                case '/': stack.push(operators.divide(a, b)); break;
+                case '+':
+                    result = operators.add(operand2, operand1); 
+                    break;
+                case '-': 
+                    result = operators.subtract(operand2, operand1);
+                    break;
+                case '/': 
+                    result = operators.divide(operand2, operand1);
+                    break;
+                case '*': 
+                    result = operators.multiply(operand2, operand1);
+                    break;
             }
+
+            stack.push(result);
         }
     });
     
@@ -109,21 +130,7 @@ function evaluatePostfix(postfixTokens)
 function evaluateExpression(expression) {
     const tokens = tokenize(expression);
     const postfix = infixToPostfix(tokens);
-    return parseInt(evaluatePostfix(postfix));
+    return evaluatePostfix(postfix);
 }
 
-
-function temp(expression) {
-    const tokens = tokenize(expression);
-    const ahh = infixToPostfix(tokens);
-
-    let string = "";
-    for (let i = 0; i < ahh.length; i++) {
-        string += ahh[i] + "";
-    }
-
-    return string;
-}
-
-
-module.exports = {tokenize, temp, infixToPostfix, evaluatePostfix, evaluateExpression};
+module.exports = {tokenize, infixToPostfix, evaluatePostfix, evaluateExpression};
