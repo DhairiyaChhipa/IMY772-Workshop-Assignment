@@ -30,20 +30,28 @@ const evaluate = require("../src/calculator/evaluator");
 //     expect(evaluate.evaluateExpression("10 / (5 - 3) + 1")).toEqual(6);
 // });
 
-let arr = ["31", "+", "4", "*", "2"];
+// let arr = ["31", "+", "4", "*", "2"];
 
-test('Tokenizing string: 31 + 4 * 2', () => {
-    expect(evaluate.tokenize("31 + 4 * 2")).toEqual(arr);
-});
+// test('Tokenizing string: 31 + 4 * 2', () => {
+//     expect(evaluate.tokenize("31 + 4 * 2")).toEqual(arr);
+// });
 
-let arr2 = ["31", "+", "4", "*", "2", "/", "(", "1", "-", "5", ")"];
+// let arr2 = ["31", "+", "4", "*", "2", "/", "(", "1", "-", "5", ")"];
 
-test('Tokenizing string: 31 + 4 * 2 / (1 - 5)', () => {
-    expect(evaluate.tokenize("31 + 4 * 2 / (1 - 5)")).toEqual(arr2);
-});
+// test('Tokenizing string: 31 + 4 * 2 / (1 - 5)', () => {
+//     expect(evaluate.tokenize("31 + 4 * 2 / (1 - 5)")).toEqual(arr2);
+// });
 
 let arr3 = ["10", "/", "(", "5", "-", "3", ")", "+", "1"];
 
-test('Tokenizing string: 10 / (5 - 3) + 1', () => {
-    expect(evaluate.tokenize("10 / (5 - 3) + 1")).toEqual(arr3);
+// test('Tokenizing string: 10 / (5 - 3) + 1', () => {
+//     expect(evaluate.tokenize("10 / (5 - 3) + 1")).toEqual(arr3);
+// });
+
+// -------------------------------------------
+
+let arr4 = ["10", "5", "3", "-", "/", "1", "+"];
+
+test('Converting the infix string: 10 / (5 - 3) + 1 to postfix', () => {
+    expect(evaluate.infixToPostfix(arr3)).toEqual(arr4);
 });

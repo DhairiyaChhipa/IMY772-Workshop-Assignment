@@ -1,5 +1,6 @@
 const { Stack } = require("./stack");
 const operators = require(`./arithmeticOperators`);
+const e = require("express");
 
 // let tokens = new Stack();
 
@@ -33,6 +34,10 @@ function tokenize(expression) {
 
 function infixToPostfix(tokens) {
 
+    const delimiters = "+-/*()";
+    let postfixArr = [];
+    let buffer = [];
+
     const precedence = {
         '+': 1,
         '-': 1,
@@ -46,7 +51,37 @@ function infixToPostfix(tokens) {
         '/': 'Left',
     };
     
+    tokens.forEach(token => {
+        if (!delimiters.includes(token)) {
+            postfixArr.push(token);
+        }
         
+        else if (token == "(") {
+            buffer.push(token);
+        }
+
+        else if (token == ")") {
+            while (buffer.length > 0 && buffer[buffer.length - 1] != '(') {
+                postfixArr.push(buffer.pop())
+                buffer.pop();
+            }
+        }
+
+        else {
+            while (buffer.length > 0 && (precedence[token] <= precedence[buffer[buffer.length - 1]]) && associativity[token] === 'Left') {
+                postfixArr.push(buffer.pop());
+            }
+            buffer.push(token);
+        }
+    });
+
+    while (buffer.length > 0) {
+        if (buffer[buffer.length - 1] == '(')
+            return "This expression is invalid";
+        postfixArr.push(buffer.pop());
+    }
+
+    return postfixArr;
 }
 
 function evaluatePostfix(postfixTokens)
