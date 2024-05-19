@@ -1,6 +1,4 @@
-const { Stack } = require("./stack");
 const operators = require(`./arithmeticOperators`);
-const e = require("express");
 
 function tokenize(expression) {
     let tokens = [];
@@ -25,12 +23,6 @@ function tokenize(expression) {
     if (currToken.length > 0) {
         tokens.push(currToken);
     }
-
-    // let string = "";
-    // for (let i = 0; i < tokens.length; i++) {
-    //     string += tokens[i] + " ";
-    // }
-    // console.log(string);
 
     return tokens;
 }
