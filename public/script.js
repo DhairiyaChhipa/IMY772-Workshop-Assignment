@@ -1,4 +1,5 @@
 const convert = require("../src/calculator/converter");
+const eval = require("../src/calculator/evaluator");
 
 init();
 
@@ -10,8 +11,6 @@ function init() {
     document.getElementById("decToHex-result").innerText = "";
 
     const list = document.querySelectorAll(".btn");
-
-    console.log(list.length);
 
     for (let i = 0; i < list.length; i++)
     {
@@ -57,31 +56,36 @@ function init() {
     })
 }
 
-function addEvent(event, element, func){
-    element.addEventListener(event, func);
-}
-
-function display(val) {
-    document.getElementById("result").value += val;
-}
-
 function solve() { 
-    let x = document.getElementById("result").value;
-    console.log(x);
-    let y = evaluate(x);
-    document.getElementById("result").value = y;
-}
+    document.getElementById("error-result").innerText = "";
 
-function evaluate(expression) {
     try {
-        
-    } catch (error) {
-        console.log(error);
-    }
+        let expression = document.getElementById("result").value;
+        validateInput(expression);
+        let result = eval.evaluateExpression(expression);
+        document.getElementById("result").value = result;
+    } 
+    catch (error) {
+        let errorMessage = "";
+        if (error == "Long operand") errorMessage = "Please input numbers consisting of 3 characters or less";
+        if (error == "Invalid operand") errorMessage = "Please valid hexadecimal values";
+        if (error == "This expression is invalid") errorMessage = "Please enter a valid mathematical expression";
+
+        document.getElementById("error-result").innerText = errorMessage;
+    }    
 }
 
-function clear() { 
-    document.getElementById("result").value = "";
+function validateInput(expression){
+    const delimiters = "+-/*";
+    let tokens = eval.tokenize(expression);
+
+    for (let i = 0; i < tokens.length - 2; i++){
+        let x = tokens[i];
+        let y = tokens[i + 1];
+        if (delimiters.includes(x) && delimiters.includes(y)) throw "This expression is invalid";
+    }
+
+    return true;
 }
 
 function convertToDec(val) {
@@ -92,8 +96,12 @@ function convertToDec(val) {
         }
         let result = convert.hextoDec(val);
         document.getElementById("hexToDec-result").innerText = result;
+        document.getElementById("error-convert-hex").innerText = "";
+
     } catch(error) {
-        document.getElementById("hexToDec-result").innerText = error;
+        let errorMessage = "";
+        if (error == "Non-hexadecimal number") errorMessage = "Please enter a valid hexadecimal number";
+        document.getElementById("error-convert-hex").innerText = errorMessage;
     }
 }
 
@@ -105,8 +113,23 @@ function convertToHex(val) {
         }
         let result = convert.decToHex(parseInt(val));
         document.getElementById("decToHex-result").innerText = result;
+        document.getElementById("error-convert-dec").innerText = "";
 
     } catch(error) {
-        document.getElementById("decToHex-result").innerText = error;
+        let errorMessage = "";
+        if (error == "Non-decimal number") errorMessage = "Please enter a valid decimal number";
+        document.getElementById("error-convert-dec").innerText = errorMessage;
     }
+}
+
+function addEvent(event, element, func){
+    element.addEventListener(event, func);
+}
+
+function clear() { 
+    document.getElementById("result").value = "";
+}
+
+function display(val) {
+    document.getElementById("result").value += val;
 }

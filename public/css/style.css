@@ -150,7 +150,7 @@ hr{
     border-radius: 5px;
     height: 2.5em; 
     width: 13.5em;
-    margin-top: 1em;
+    margin-top: 0.5em;
     font-size: 1.4em;
     color: #EAEAEA;
     filter: drop-shadow(3px 4px 9.7px #00000020);
@@ -170,9 +170,18 @@ hr{
 }
 
 .error-message{
-    position: absolute;
     color: var(--warning);
+    padding-top: 0.5em;
+}
+
+#error-result{
+    position: absolute;
     top: 40px;
     right: 460px;
     text-align: right;
+}
+
+.row-converter{
+    display: flex;
+    flex-direction: column;
 }

@@ -14,6 +14,7 @@
                     
                     <div class="row-converter">
                         <label for="hexToDec" class="convert-label">Hexadecimal to decimal</label><br>
+                        <div class="error-message"> <span id="error-convert-hex"> </span> </div>
                         <input type="text" id="hexToDec" class="convert-input"/>
                         <div class="convert-output" id="hexToDec-output"> = <span id="hexToDec-result"></span> </div>
                     </div>
@@ -22,12 +23,13 @@
                     
                     <div class="row-converter">
                         <label for="DexToHex" class="convert-label">Decimal to hexadecimal</label><br>
+                        <div class="error-message"> <span id="error-convert-dec"> </span> </div>
                         <input type="text" id="decToHex" class="convert-input"/>
                         <div class="convert-output" id="decToHex-output"> = <span id="decToHex-result"> </span> </div>
                     </div>
                 </div> <!--contrainer-converter-->
     
-                <div class="error-message">Please input numbers consisting of 3 characters or less</div>
+                <div class="error-message"> <span id="error-result"> </span> </div>
                 <div id="container-calculator" class="flex-item">
                     <div class="btn btn-operator" id="clear" data-operation="clear"> <i class="btn-symbol"> CE </i> </div>
                     <input type="text" id="result"/>
