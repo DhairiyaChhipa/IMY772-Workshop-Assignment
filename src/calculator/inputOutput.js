@@ -1,14 +1,14 @@
 const convert = require("./converter");
 
-function validOperand(x){
-    if (!convert.isHexadecimal(x)) throw "Invalid operand";
-    if (x.length > 3) throw "Long operand";
+function validOperand(value){
+    if (!convert.isHexadecimal(value)) throw "Invalid operand";
+    if (value.length > 3) throw "Long operand";
     return true;
 }
 
-function validAnswer(x){
-    if (!convert.isHexadecimal(x)) throw "Invalid answer";
-    if (x.length > 6) throw "Long answer";
+function validAnswer(value){
+    if (!convert.isHexadecimal(value)) throw "Invalid answer";
+    if (value.length > 6) throw "Long answer";
     return true;
 }
 

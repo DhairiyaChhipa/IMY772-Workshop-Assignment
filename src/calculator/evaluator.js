@@ -33,7 +33,7 @@ function validateTokens(tokens) {
     try {
         tokens.forEach(token =>{
             if (!delimiters.includes(token)) {
-                if (!inputOutput.validOperand(token)) return;
+                if (!inputOutput.validOperand(token, )) return;
             }
         });
     }  
@@ -115,8 +115,6 @@ function evaluatePostfix(postfixTokens)
             const operand2 = stack.pop();
             var result;
 
-            // if (!inputOutput.validOperands(operand1, operand2)) return;
-
             switch (token) {
                 case '+':
                     result = operators.add(operand2, operand1); 
@@ -142,10 +140,14 @@ function evaluatePostfix(postfixTokens)
 }
 
 function evaluateExpression(expression) {
-    const tokens = tokenize(expression);
-    validateTokens(tokens);
-    const postfix = infixToPostfix(tokens);
-    return evaluatePostfix(postfix);
+    try {
+        const tokens = tokenize(expression);
+        validateTokens(tokens);
+        const postfix = infixToPostfix(tokens);
+        return evaluatePostfix(postfix);
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = {tokenize, infixToPostfix, evaluatePostfix, evaluateExpression};
