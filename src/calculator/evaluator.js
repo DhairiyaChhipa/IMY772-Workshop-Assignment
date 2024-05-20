@@ -1,9 +1,11 @@
 const operators = require(`./arithmeticOperators`);
+const inputOutput = require(`./inputOutput`);
+
+const delimiters = "+-/*()";
 
 function tokenize(expression) {
     let tokens = [];
     let currToken = "";
-    const delimiters = "+-/*()";
 
     for (let x of expression) {
         if (x === ' ') continue;
@@ -27,9 +29,20 @@ function tokenize(expression) {
     return tokens;
 }
 
-function infixToPostfix(tokens) {
+function validateTokens(tokens) {
+    try {
+        tokens.forEach(token =>{
+            if (!delimiters.includes(token)) {
+                if (!inputOutput.validOperand(token)) return;
+            }
+        });
+    }  
+    catch (error) {
+        throw error;
+    }
+}
 
-    const delimiters = "+-/*()";
+function infixToPostfix(tokens) {
     let postfixArr = [];
     let buffer = [];
 
@@ -102,6 +115,8 @@ function evaluatePostfix(postfixTokens)
             const operand2 = stack.pop();
             var result;
 
+            // if (!inputOutput.validOperands(operand1, operand2)) return;
+
             switch (token) {
                 case '+':
                     result = operators.add(operand2, operand1); 
@@ -121,13 +136,14 @@ function evaluatePostfix(postfixTokens)
         }
     });
     
-    let temp = stack.pop();
-    //console.log(temp);
-    return temp;
+    let answer = stack.pop();
+    if (!inputOutput.validAnswer(answer)) return;
+    return answer;
 }
 
 function evaluateExpression(expression) {
     const tokens = tokenize(expression);
+    validateTokens(tokens);
     const postfix = infixToPostfix(tokens);
     return evaluatePostfix(postfix);
 }

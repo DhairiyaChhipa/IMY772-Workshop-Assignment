@@ -1,41 +1,49 @@
 const directory = "../src/calculator"
 const inputOutput = require(`${directory}/inputOutput`);
-const multiply = require(`${directory}/arithmeticOperators`).multiply;
+const evaluate = require("../src/calculator/evaluator");
 
 // =================== INPUT ===================
 // Testing input type
-test('Entering a non-hexadecimal number for both operands', () => {
-    expect(() => inputOutput.validOperands("2BCSD609HM", "87D9FYHYL")).toThrow("Invalid operands");
+test('Long operands standalone', () => {
+    expect(() => inputOutput.validOperand("8HL")).toThrow("Invalid operand");
 });
 
-test('Entering a non-hexadecimal number as operand 1', () => {
-    expect(() => inputOutput.validOperands("87D9FYHYL", "2BC")).toThrow("Invalid operand 1");
+// // Testing input length
+test('Long operands standalone', () => {
+    expect(() => inputOutput.validOperand("41B3")).toThrow("Long operand");
 });
 
-test('Entering a non-hexadecimal number as operand 2', () => {
-    expect(() => inputOutput.validOperands("2BC", "87D9FYHYL")).toThrow("Invalid operand 2");
+test('Long operands', () => {
+    expect(() => evaluate.evaluateExpression("41B3 + (1A3B * 12)")).toThrow("Long operand");
 });
 
-// Testing input length
-test('Entering two hexadecimal operands that are longer than 3 characters', () => {
-    expect(() => inputOutput.validOperands("2BDF", "8CD5")).toThrow("Long operands");
+test('Long operands', () => {
+    expect(() => evaluate.evaluateExpression("2B + 8CD5")).toThrow("Long operand");
 });
 
-test('Entering a hexadecimal operand 1 that is longer than 3 characters', () => {
-    expect(() => inputOutput.validOperands("8CD5", "2B")).toThrow("Long operand 1");
+test('Long operands', () => {
+    expect(() => evaluate.evaluateExpression("8CD5 + 2B")).toThrow("Long operand");
 });
 
-test('Entering a hexadecimal operand 2 that is longer than 3 characters', () => {
-    expect(() => inputOutput.validOperands("2B", "8CD5")).toThrow("Long operand 2");
+test('Long operands', () => {
+    expect(() => evaluate.evaluateExpression("2BDF + 8CD5")).toThrow("Long operand");
 });
 
 // =================== OUTPUT ===================
 // Testing output type
-test('Output is a hexadecimal number', () => {
-    expect(() => inputOutput.validOperands(multiply("8AB", "85"))).not.toThrow("Invalid answer");
+test('Long operands standalone', () => {
+    expect(() => inputOutput.validAnswer("41X3")).toThrow("Invalid answer");
+});
+
+test('Output is a hexadecimal value', () => {
+    expect(() => evaluate.evaluateExpression("8AB * 85")).not.toThrow("Invalid answer");
 });
 
 // Testing output length
-test('Output longer than 6 characters', () => {
-    expect(() => inputOutput.validAnswer(multiply("8AB", "8CD5"))).toThrow("Long answer");
+test('Long answer standalone', () => {
+    expect(() => inputOutput.validAnswer("41B3CB3")).toThrow("Long answer");
+});
+
+test('Long answer in an evaluation', () => {
+    expect(() => evaluate.evaluateExpression("DDD * 8AB * DDD)")).toThrow("Long answer");
 });
