@@ -39,6 +39,7 @@ function infixToPostfix(tokens) {
         '*': 2,
         '/': 2,
     };
+
     const associativity = {
         '+': 'Left',
         '-': 'Left',
@@ -56,23 +57,27 @@ function infixToPostfix(tokens) {
         }
 
         else if (token == ")") {
-            while (buffer.length > 0 && buffer[buffer.length - 1] != '(') {
+            while (buffer.length > 0 && buffer[buffer.length - 1] != "(") {
                 postfixArr.push(buffer.pop())
-                buffer.pop();
             }
+
+            buffer.pop();
         }
 
         else {
-            while (buffer.length > 0 && (precedence[token] <= precedence[buffer[buffer.length - 1]]) && associativity[token] === 'Left') {
+            while ((buffer.length > 0) && (precedence[token] <= precedence[buffer[buffer.length - 1]]) && (associativity[token] == 'Left')) {
                 postfixArr.push(buffer.pop());
             }
+
             buffer.push(token);
         }
     });
 
     while (buffer.length > 0) {
-        if (buffer[buffer.length - 1] == '(')
+        if (buffer[buffer.length - 1] == "(") {
             return "This expression is invalid";
+        }
+            
         postfixArr.push(buffer.pop());
     }
 
@@ -93,8 +98,8 @@ function evaluatePostfix(postfixTokens)
 
         else 
         {
-            const operand2 = stack.pop();
             const operand1 = stack.pop();
+            const operand2 = stack.pop();
             var result;
 
             switch (token) {
@@ -116,7 +121,9 @@ function evaluatePostfix(postfixTokens)
         }
     });
     
-    return stack.pop();
+    let temp = stack.pop();
+    //console.log(temp);
+    return temp;
 }
 
 function evaluateExpression(expression) {
