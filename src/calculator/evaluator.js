@@ -99,44 +99,48 @@ function infixToPostfix(tokens) {
 
 function evaluatePostfix(postfixTokens)
 {
-    const stack = [];
+    try {
+        const stack = [];
     
-    postfixTokens.forEach(token => {
-
-        const delimiters = "+-/*()";
-
-        if (!delimiters.includes(token)) {
-            stack.push(token);
-        }
-
-        else 
-        {
-            const operand1 = stack.pop();
-            const operand2 = stack.pop();
-            var result;
-
-            switch (token) {
-                case '+':
-                    result = operators.add(operand2, operand1); 
-                    break;
-                case '-': 
-                    result = operators.subtract(operand2, operand1);
-                    break;
-                case '/': 
-                    result = operators.divide(operand2, operand1);
-                    break;
-                case '*': 
-                    result = operators.multiply(operand2, operand1);
-                    break;
+        postfixTokens.forEach(token => {
+            const delimiters = "+-/*()";
+    
+            if (!delimiters.includes(token)) {
+                stack.push(token);
             }
-
-            stack.push(result);
-        }
-    });
     
-    let answer = stack.pop();
-    if (!inputOutput.validAnswer(answer)) return;
-    return answer;
+            else 
+            {
+                const operand1 = stack.pop();
+                const operand2 = stack.pop();
+                var result;
+    
+                switch (token) {
+                    case '+':
+                        result = operators.add(operand2, operand1); 
+                        break;
+                    case '-': 
+                        result = operators.subtract(operand2, operand1);
+                        break;
+                    case '/': 
+                        result = operators.divide(operand2, operand1);
+                        break;
+                    case '*': 
+                        result = operators.multiply(operand2, operand1);
+                        break;
+                }
+    
+                stack.push(result);
+            }
+        });
+        
+        let answer = stack.pop();
+        if (!inputOutput.validAnswer(answer)) return;
+        return answer;   
+    } 
+    catch (error) {
+        throw error;
+    }
 }
 
 function evaluateExpression(expression) {

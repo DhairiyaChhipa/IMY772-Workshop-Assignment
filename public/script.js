@@ -28,13 +28,11 @@ function init() {
                     }
                 });
                 break;
-
             case 24:
                 addEvent("click", list[i], ()=>{
                     solve();
                 });
                 break;
-
             default:
                 addEvent("click", list[i], ()=>{
                     display(list[i].dataset.operation);
@@ -64,12 +62,14 @@ function solve() {
         validateInput(expression);
         let result = eval.evaluateExpression(expression);
         document.getElementById("result").value = result;
+        document.getElementById("result").style.color = "#FFFFFF"
     } 
     catch (error) {
         let errorMessage = "";
         if (error == "Long operand") errorMessage = "Please input numbers consisting of 3 characters or less";
-        if (error == "Invalid operand") errorMessage = "Please valid hexadecimal values";
-        if (error == "This expression is invalid") errorMessage = "Please enter a valid mathematical expression";
+        else if (error == "Invalid operand" || "Non-hexadecimal number") errorMessage = "Please valid hexadecimal value(s)";
+        else if (error == "This expression is invalid") errorMessage = "Please enter a valid mathematical expression";
+        else if (error == "Negative difference") errorMessage = "Cannot evaluate an expression that results in a negative value";
 
         document.getElementById("error-result").innerText = errorMessage;
     }    
@@ -94,6 +94,7 @@ function convertToDec(val) {
             document.getElementById("hexToDec-result").innerText = "";
             return;
         }
+        
         let result = convert.hextoDec(val);
         document.getElementById("hexToDec-result").innerText = result;
         document.getElementById("error-convert-hex").innerText = "";
@@ -101,16 +102,18 @@ function convertToDec(val) {
     } catch(error) {
         let errorMessage = "";
         if (error == "Non-hexadecimal number") errorMessage = "Please enter a valid hexadecimal number";
+        document.getElementById("hexToDec-result").innerText = "";
         document.getElementById("error-convert-hex").innerText = errorMessage;
     }
 }
 
 function convertToHex(val) {
-    try{
+    try {
         if (val == "" || val == null){
             document.getElementById("decToHex-result").innerText = "";
             return;
         }
+
         let result = convert.decToHex(parseInt(val));
         document.getElementById("decToHex-result").innerText = result;
         document.getElementById("error-convert-dec").innerText = "";
@@ -118,6 +121,7 @@ function convertToHex(val) {
     } catch(error) {
         let errorMessage = "";
         if (error == "Non-decimal number") errorMessage = "Please enter a valid decimal number";
+        document.getElementById("decToHex-result").innerText = "";
         document.getElementById("error-convert-dec").innerText = errorMessage;
     }
 }
@@ -132,4 +136,5 @@ function clear() {
 
 function display(val) {
     document.getElementById("result").value += val;
+    document.getElementById("result").style.color = "#ECECEC";
 }

@@ -12,7 +12,7 @@ function subtract(x, y){
 }
 
 function multiply(x, y){
-    if (x == 0 || y == 0) return 0;        
+    if (x == 0 || y == 0) return 0;    
     return convert.decToHex(convert.hextoDec(x) * convert.hextoDec(y));
 }
 

@@ -29,13 +29,11 @@ function init() {
                     }
                 });
                 break;
-
             case 24:
                 addEvent("click", list[i], ()=>{
                     solve();
                 });
                 break;
-
             default:
                 addEvent("click", list[i], ()=>{
                     display(list[i].dataset.operation);
@@ -65,12 +63,14 @@ function solve() {
         validateInput(expression);
         let result = eval.evaluateExpression(expression);
         document.getElementById("result").value = result;
+        document.getElementById("result").style.color = "#FFFFFF"
     } 
     catch (error) {
         let errorMessage = "";
         if (error == "Long operand") errorMessage = "Please input numbers consisting of 3 characters or less";
-        if (error == "Invalid operand") errorMessage = "Please valid hexadecimal values";
-        if (error == "This expression is invalid") errorMessage = "Please enter a valid mathematical expression";
+        else if (error == "Invalid operand" || "Non-hexadecimal number") errorMessage = "Please valid hexadecimal value(s)";
+        else if (error == "This expression is invalid") errorMessage = "Please enter a valid mathematical expression";
+        else if (error == "Negative difference") errorMessage = "Cannot evaluate an expression that results in a negative value";
 
         document.getElementById("error-result").innerText = errorMessage;
     }    
@@ -95,6 +95,7 @@ function convertToDec(val) {
             document.getElementById("hexToDec-result").innerText = "";
             return;
         }
+        
         let result = convert.hextoDec(val);
         document.getElementById("hexToDec-result").innerText = result;
         document.getElementById("error-convert-hex").innerText = "";
@@ -102,16 +103,18 @@ function convertToDec(val) {
     } catch(error) {
         let errorMessage = "";
         if (error == "Non-hexadecimal number") errorMessage = "Please enter a valid hexadecimal number";
+        document.getElementById("hexToDec-result").innerText = "";
         document.getElementById("error-convert-hex").innerText = errorMessage;
     }
 }
 
 function convertToHex(val) {
-    try{
+    try {
         if (val == "" || val == null){
             document.getElementById("decToHex-result").innerText = "";
             return;
         }
+
         let result = convert.decToHex(parseInt(val));
         document.getElementById("decToHex-result").innerText = result;
         document.getElementById("error-convert-dec").innerText = "";
@@ -119,6 +122,7 @@ function convertToHex(val) {
     } catch(error) {
         let errorMessage = "";
         if (error == "Non-decimal number") errorMessage = "Please enter a valid decimal number";
+        document.getElementById("decToHex-result").innerText = "";
         document.getElementById("error-convert-dec").innerText = errorMessage;
     }
 }
@@ -133,6 +137,7 @@ function clear() {
 
 function display(val) {
     document.getElementById("result").value += val;
+    document.getElementById("result").style.color = "#ECECEC";
 }
 },{"../src/calculator/converter":3,"../src/calculator/evaluator":4}],2:[function(require,module,exports){
 const convert = require("./converter");
@@ -149,7 +154,7 @@ function subtract(x, y){
 }
 
 function multiply(x, y){
-    if (x == 0 || y == 0) return 0;        
+    if (x == 0 || y == 0) return 0;    
     return convert.decToHex(convert.hextoDec(x) * convert.hextoDec(y));
 }
 
@@ -284,44 +289,48 @@ function infixToPostfix(tokens) {
 
 function evaluatePostfix(postfixTokens)
 {
-    const stack = [];
+    try {
+        const stack = [];
     
-    postfixTokens.forEach(token => {
-
-        const delimiters = "+-/*()";
-
-        if (!delimiters.includes(token)) {
-            stack.push(token);
-        }
-
-        else 
-        {
-            const operand1 = stack.pop();
-            const operand2 = stack.pop();
-            var result;
-
-            switch (token) {
-                case '+':
-                    result = operators.add(operand2, operand1); 
-                    break;
-                case '-': 
-                    result = operators.subtract(operand2, operand1);
-                    break;
-                case '/': 
-                    result = operators.divide(operand2, operand1);
-                    break;
-                case '*': 
-                    result = operators.multiply(operand2, operand1);
-                    break;
+        postfixTokens.forEach(token => {
+            const delimiters = "+-/*()";
+    
+            if (!delimiters.includes(token)) {
+                stack.push(token);
             }
-
-            stack.push(result);
-        }
-    });
     
-    let answer = stack.pop();
-    if (!inputOutput.validAnswer(answer)) return;
-    return answer;
+            else 
+            {
+                const operand1 = stack.pop();
+                const operand2 = stack.pop();
+                var result;
+    
+                switch (token) {
+                    case '+':
+                        result = operators.add(operand2, operand1); 
+                        break;
+                    case '-': 
+                        result = operators.subtract(operand2, operand1);
+                        break;
+                    case '/': 
+                        result = operators.divide(operand2, operand1);
+                        break;
+                    case '*': 
+                        result = operators.multiply(operand2, operand1);
+                        break;
+                }
+    
+                stack.push(result);
+            }
+        });
+        
+        let answer = stack.pop();
+        if (!inputOutput.validAnswer(answer)) return;
+        return answer;   
+    } 
+    catch (error) {
+        throw error;
+    }
 }
 
 function evaluateExpression(expression) {
