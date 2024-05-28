@@ -15,6 +15,7 @@
                     <div class="row-converter">
                         <label for="hexToDec" class="convert-label">Hexadecimal to decimal</label><br>
                         <div class="error-message"> <span id="error-convert-hex"></span> </div>
+                        <div class="error-message"> <span id="error-convert-hex"></span> </div>
                         <input type="text" id="hexToDec" class="convert-input"/>
                         <div class="convert-output" id="hexToDec-output"> = <span id="hexToDec-result"></span> </div>
                     </div>
@@ -24,7 +25,9 @@
                     <div class="row-converter">
                         <label for="DexToHex" class="convert-label">Decimal to hexadecimal</label><br>
                         <div class="error-message"> <span id="error-convert-dec"></span> </div>
+                        <div class="error-message"> <span id="error-convert-dec"></span> </div>
                         <input type="text" id="decToHex" class="convert-input"/>
+                        <div class="convert-output" id="decToHex-output"> = <span id="decToHex-result"></span> </div>
                         <div class="convert-output" id="decToHex-output"> = <span id="decToHex-result"></span> </div>
                     </div>
                 </div> <!--contrainer-converter-->
@@ -32,6 +35,7 @@
                 <div id="container-calculator" class="flex-item">
                     <div class="error-message" id="calculator-error"> <span id="error-result"></span> </div>
                     <div class="btn btn-operator" id="clear" data-operation="clear"> <i class="btn-symbol"> CE </i> </div>
+                    <input type="text" id="result" disabled/>
                     <input type="text" id="result" disabled/>
     
                     <div class="btn btn-operator" data-operation="("> <i class="btn-symbol"> ( </i> </div>
