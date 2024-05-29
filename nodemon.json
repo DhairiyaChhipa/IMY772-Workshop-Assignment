@@ -1,0 +1,8 @@
+{
+    "watch": ["src", "public"],
+    "ext": "js,json,html,css",
+    "ignore": ["bundle.js"],
+    "exec": "npm run dev",
+    "delay": "2"
+  }
+  

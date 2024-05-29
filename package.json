@@ -1,0 +1,22 @@
+{
+  "name": "hexadecimal-calculator",
+  "version": "1.0.0",
+  "description": "A hexadecimal calculator for the IMY772 hexadecimal calculator",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "browserify public/script.js > public/bundle.js && node app.js",
+    "start": "nodemon"
+  },
+  "author": "Dhairiya Chhipa",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "cypress": "^13.9.0",
+    "express": "^4.19.2",
+    "jsonfile": "^6.1.0"
+  }
+}
