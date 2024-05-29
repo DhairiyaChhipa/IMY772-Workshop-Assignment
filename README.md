@@ -25,4 +25,3 @@
 - I had a a mixup with phases 3-1 and 3-2. I started the linking of frontend to the units in phase3-1. To rectify this, phase3-2 branches from phase3-1 and any linking code was removed from phase3-1
 - I had a realisation phase 3-2 that you need to manually evaluate the input/string entered by the user, and that I did not account for this while completing phase 2. I created a branch called "phase2-2-3" that focuses on exclusively building and testing the functionality around parsing in a string and computing the result based on mathematical precedence and associativity but for hexadecimal values and operations 🫠
 - Added more robust error handling to the backend and frontend in phase3-2
-- Trying to fix merging with main
