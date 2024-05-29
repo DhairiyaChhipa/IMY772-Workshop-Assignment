@@ -1,7 +1,7 @@
 # IMY772 Workshop Assignment
 
 ## Link To Demo Video
-- 🔗 [Demo Video Link] (https://drive.google.com/file/d/1IJt2Cb6yn9_yQmzRVTTjJEevQCksLMW_/view?usp=sharing)
+- 🔗 [Demo Video Link](https://drive.google.com/file/d/1IJt2Cb6yn9_yQmzRVTTjJEevQCksLMW_/view?usp=sharing)
 
 ## Functional Requirements For A Hexadecimal Calculator
 ### 🧮 Basic Operations
